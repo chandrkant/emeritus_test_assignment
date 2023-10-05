@@ -14,16 +14,11 @@ class Batch < ApplicationRecord
   paginates_per 10
 
   def self.search(params)
-    sql = []
-
-    sql << "batches.name LIKE '%#{params[:name]}%'" if params[:name].present?
-
-    sql.join(" AND ")
-    self
-      .includes(:school, :course)
-      .order("batches.updated_at desc")
-      .where(sql)
-      .page(params[:page])
+    query = self.includes(:school, :course).order("batches.updated_at desc")
+    query = query.where("batches.name LIKE ?", "%#{params[:name]}%") if params[
+      :name
+    ].present?
+    query.page(params[:page])
   end
 
   private

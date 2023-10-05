@@ -22,15 +22,17 @@ class User < ApplicationRecord
       type == method
     end
   end
+
   def self.search(params)
-    sql = []
+    query = self.order(updated_at: :desc)
 
-    sql << "users.name LIKE '%#{params[:name]}%'" if params[:name].present?
-    sql << "users.email LIKE '%#{params[:email]}%'" if params[:email].present?
+    query = query.where("users.name LIKE ?", "%#{params[:name]}%") if params[
+      :name
+    ].present?
+    query = query.where("users.email LIKE ?", "%#{params[:email]}%") if params[
+      :email
+    ].present?
 
-    # Combine conditions with 'AND'
-    query = sql.join(" AND ")
-    self.order("users.updated_at desc").where(query).page(params[:page])
-    # You can also add additional conditions here if needed.
+    query.page(params[:page])
   end
 end

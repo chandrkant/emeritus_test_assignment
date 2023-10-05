@@ -17,19 +17,21 @@ class School < ApplicationRecord
     school = School.find_by(id: id)
     school.courses.pluck(:name, :id)
   end
+
   def self.search(params)
-    sql = []
-    sql << "schools.name LIKE '%#{params[:name]}%'" if params[:name].present?
-    sql << "schools.city = '#{params[:city]}'" if params[:city].present?
-    if params[:country].present?
-      sql << "schools.country = '#{params[:country]}'"
+    schools = self.includes(:school_admin).order(updated_at: :desc)
+
+    if params[:name].present?
+      schools = schools.where("schools.name LIKE ?", "%#{params[:name]}%")
     end
-    query = sql.join(" AND ")
-    self
-      .includes(:school_admin)
-      .order("schools.updated_at desc")
-      .where(query)
-      .page(params[:page])
+
+    schools = schools.where(city: params[:city]) if params[:city].present?
+
+    if params[:country].present?
+      schools = schools.where(country: params[:country])
+    end
+
+    schools.page(params[:page])
   end
 
   private

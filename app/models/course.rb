@@ -13,17 +13,17 @@ class Course < ApplicationRecord
   paginates_per 10
 
   def self.search(params)
-    sql = []
+    courses = Course.all
 
-    sql << "courses.name LIKE '%#{params[:name]}%'" if params[:name].present?
-    if params[:duration].present?
-      sql << "courses.duration = '#{params[:duration]}'"
+    if params[:name].present?
+      courses = courses.where("courses.name LIKE ?", "%#{params[:name]}%")
     end
 
-    query = sql.join(" AND ")
+    if params[:duration].present?
+      courses = courses.where(duration: params[:duration])
+    end
 
-    query.present? ? query : nil
-    order("courses.updated_at desc").where(query).page(params[:page])
+    courses.order(updated_at: :desc).page(params[:page])
   end
   def method_name
   end
