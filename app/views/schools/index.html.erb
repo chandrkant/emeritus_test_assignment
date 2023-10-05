@@ -15,16 +15,16 @@
                 <div class="col-md-2">
                   <input type="text" name="country" value="<%= params[:country] %>" class="form-control" placeholder="Search by country" aria-controls="list" id="searchBox">
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-1"></div>
                 <div class="col-md-1">
                   <%= link_to "Clear", schools_path, class: "btn btn-outline-primary float-end" %>
                 </div>
-                <div class="col-md-1">
+                <div class="col-sm-2">
                   <input type="submit" name="commit" value="Search" class="btn btn-primary">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                   <% if current_user.admin? %>
-                    <a href="<%= new_school_path %>" data-title="Compose" class="btn btn-primary" style="color: #fff;">Add School</a>
+                    <a href="<%= new_school_path %>" data-title="Compose" class="btn btn-primary" style="color: #fff;">+Add</a>
                   <% end %>  
                 </div>
               </div>

@@ -9,16 +9,16 @@
                 <div class="col-md-2">
                   <input type="text" name="name" value="<%= params[:name] %>" class="form-control" placeholder="Search by name.." aria-controls="list" id="searchBox">
                 </div>
-                <div class="col-md-6"></div>
+                <div class="col-md-5"></div>
                 <div class="col-md-1">
                   <%= link_to "Clear", batches_path, class: "btn btn-outline-primary float-end" %>
                 </div>
-                <div class="col-md-1">
+                <div class="col-sm-2">
                   <input type="submit" name="commit" value="Search" class="btn btn-primary">
                 </div>
                 <%if can? :create, Batch%>
-                  <div class="col-md-2">
-                    <a href="<%= new_batch_path %>" data-title="Compose" class="btn btn-primary" style="color: #fff;">Add Batch</a>
+                  <div class="col-md-1">
+                    <a href="<%= new_batch_path %>" data-title="Compose" class="btn btn-primary" style="color: #fff;">+Add</a>
                   </div>
                 <%end%>
               </div>

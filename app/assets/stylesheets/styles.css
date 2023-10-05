@@ -11720,3 +11720,8 @@ body {
     rgba(37, 117, 252, 1)
   );
 }
+.fixed-top,
+.sb-nav-fixed #layoutSidenav #layoutSidenav_nav,
+.sb-nav-fixed .sb-topnav {
+  top: 5%;
+}

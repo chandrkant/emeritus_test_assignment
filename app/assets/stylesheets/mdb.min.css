@@ -6959,7 +6959,7 @@ h6 {
   font-family: Roboto;
   src: local(Roboto Regular), url(Roboto-Regular.eot);
   src: url(Roboto-Regular.eot?#iefix) format("embedded-opentype"),
-    url(.Roboto-Regular.woff2) format("woff2"),
+    url(Roboto-Regular.woff2) format("woff2"),
     url(Roboto-Regular.woff) format("woff"),
     url(Roboto-Regular.ttf) format("truetype");
   font-weight: 400;
