@@ -57,7 +57,7 @@
                 <div class="form-group school_form">
                   <label class="control-label col-md-3">School Admin<font color="red">*</font></label>
                   <div class="col-md-9">
-                    <%= f.select :user_id, SchoolAdmin.available_school_admins.collect {|u| [u.name, u.id]}, {}, {class: "form-control"} %>
+                    <%= f.select :user_id, SchoolAdmin.available_school_admins(f.object.id).collect {|u| [u.name, u.id]}, {}, {class: "form-control"} %>
                   </div>
                 </div>
               </div>

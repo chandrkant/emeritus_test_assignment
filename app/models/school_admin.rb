@@ -7,8 +7,8 @@ class SchoolAdmin < User
   ################## Pagination ##################
   paginates_per 10
   # scope :available_school_admins, -> { where(:attibute => value)}
-  def self.available_school_admins
-    ids = School.school_admins
+  def self.available_school_admins(school_id)
+    ids = School.where.not(id: school_id).school_admins
     SchoolAdmin.where.not(id: ids)
   end
 end
