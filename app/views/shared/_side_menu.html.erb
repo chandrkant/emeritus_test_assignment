@@ -3,8 +3,8 @@
     <div class="position-sticky">
       <div class="list-group list-group-flush mx-3 mt-4">
         <a
-          href="#"
-          class="list-group-item list-group-item-action py-2 ripple"
+          href="<%= root_path %>"
+          class="list-group-item list-group-item-action py-2 ripple <%=params[:controller]=="home" ? 'active' : ''%>"
           aria-current="true"
         >
           <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Main dashboard</span>
@@ -25,7 +25,10 @@
           ><i class="fa-solid fa-book fa-fw me-3"></i><span>Courses</span></a
         >
         <%end%>
-        <% if can? :read, School %>
+          <% if can? :read, School %>
+            <a href="<%= schools_path %>" class="list-group-item list-group-item-action py-2 ripple <%=params[:controller]=="schools" ? 'active' : ''%>">
+              <i class="fa-solid fa-school fa-fw me-3"></i><span>Schools</span>
+            </a>
           <% elsif current_user.schooladmin? %>
             <% if current_user.school %>
             <a href="<%= school_path(current_user.school.id) %>" class="list-group-item list-group-item-action py-2 ripple <%=params[:controller]=="schools" ? 'active' : ''%>">
@@ -38,7 +41,7 @@
             </a>
           <% end %>
          <% if can? :read, Batch%> 
-        <a href="<%= batches_path %>" class="list-group-item list-group-item-action py-2 ripple <%=params[:controller]=="batchs" ? 'active' : ''%>">
+        <a href="<%= batches_path %>" class="list-group-item list-group-item-action py-2 ripple <%=params[:controller]=="batches" ? 'active' : ''%>">
           <i class="fa-solid fa-chalkboard fa-fw me-3"></i><span>Batchs</span>
         </a>
         <%end%>
