@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-md-12">
+    <!-- BEGIN PORTLET-->
+        <!-- BEGIN FORM-->
+        <%= form_for(@school, html: {class: 'form-horizontal' }) do |f| %>
+          <div class="form-body">
+            <div class="row">
+              <div class="form-group school_form">
+                <label class="control-label col-md-3">School Name<font color="red">*</font></label>
+                <div class="col-md-9">
+                  <%= f.text_field :name, class: "form-control", required: true %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group school_form">
+                <label class="control-label col-md-3">Code<font color="red">*</font></label>
+                <div class="col-md-9">
+                  <%= f.text_field :code, class: "form-control", required: true, readonly: f.object.persisted? %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group school_form">
+                <label class="control-label col-md-3">Description</label>
+                <div class="col-md-9">
+                  <%= f.text_area :description, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group school_form">
+                <label class="control-label col-md-3">Street<font color="red">*</font></label>
+                <div class="col-md-9">
+                  <%= f.text_field :street, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group school_form">
+                <label class="control-label col-md-3">City<font color="red">*</font></label>
+                <div class="col-md-9">
+                  <%= f.text_field :city, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group school_form">
+                <label class="control-label col-md-3">Country<font color="red">*</font></label>
+                <div class="col-md-9">
+                  <%= f.text_field :country, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+            <% if current_user.admin? && !(f.object.persisted?) %>
+              <div class="row">
+                <div class="form-group school_form">
+                  <label class="control-label col-md-3">School Admin<font color="red">*</font></label>
+                  <div class="col-md-9">
+                    <%= f.select :user_id, SchoolAdmin.available_school_admins.collect {|u| [u.name, u.id]}, {}, {class: "form-control"} %>
+                  </div>
+                </div>
+              </div>
+            <% end %>  
+            <div class="form-actions fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="<%= schools_path %>" class="btn btn-outline-secondary">Cancel</a>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                </div>
+              </div>
+            </div>
+            <!-- END FORM-->
+          </div>  
+        <% end %>
+      <!-- End PORTLET-->
+    <!-- End FORM-->               
+  </div>
+</div>

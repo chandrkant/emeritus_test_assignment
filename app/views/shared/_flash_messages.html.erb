@@ -1,0 +1,8 @@
+<% flash.each do |type, message| %>
+  <div class="alert alert-<%= bootstrap_class_for(type) %>" id= "main_flash_msg">
+    <%= message %>
+  </div>
+<% end %>
+<script type="text/javascript">
+  $(".alert" ).fadeOut(5000);
+</script>

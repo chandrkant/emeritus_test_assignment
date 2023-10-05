@@ -1,0 +1,41 @@
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Courses List</h1>
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="row" style="margin-bottom:10px;">
+          <div class="col-sm-12 col-xs-12">
+            <form action="/courses" accept-charset="UTF-8" method="get">
+              <div class="row">
+                <div class="col-md-2">
+                  <input type="text" name="name" value="<%= params[:name] %>" class="form-control" placeholder="Search by name.." aria-controls="list" id="searchBox">
+                </div>
+                <div class="col-md-2">
+                  <input type="text" name="duration" value="<%= params[:duration] %>" class="form-control" placeholder="Search by duration" aria-controls="list" id="searchBox">
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-1">
+                  <%= link_to "Clear", courses_path, class: "btn btn-outline-primary float-end" %>
+                </div>
+                <div class="col-md-1">
+                  <input type="submit" name="commit" value="Search" class="btn btn-primary">
+                </div>
+                <%if can? :create, Course%>
+                <div class="col-md-2">
+                  <a href="<%= new_course_path %>" data-title="Compose" class="btn btn-primary" style="color: #fff;">Add Course</a>
+                </div>
+                <%end%>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+              <!-- BEGIN TABLE -->
+              <%= render partial: "courses/list" %>
+              <%= paginate @courses %>
+              <!-- END TABLE -->
+            </div>
+        </div>
+      </div>
+    </div>
+</div>

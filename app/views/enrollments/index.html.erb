@@ -1,0 +1,32 @@
+<div class="container-fluid px-4">
+  <% unless current_user.student? %>
+    <h1 class="mt-4">Enrollment List</h1>
+  <% else %>
+    <h1 class="mt-4">Your Enrollments</h1>
+  <% end %>  
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="row" style="margin-bottom:10px;">
+          <div class="col-sm-12 col-xs-12">
+            <div class="row">
+              <div class="col-md-2">
+                <% if current_user.student? %>
+                  <a href="<%= batches_path %>" data-title="Compose" class="btn btn-primary" style="color: #fff;">
+                      Enroll Courses
+                  </a>  
+                <% end %>  
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+              <!-- BEGIN TABLE -->
+              <%= render partial: "enrollments/list" %>
+              <%= paginate @enrollments %>
+              <!-- END TABLE -->
+            </div>
+        </div>
+      </div>
+    </div>
+</div>

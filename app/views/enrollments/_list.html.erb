@@ -1,0 +1,43 @@
+<table class="table table-striped table-bordered table-hover" id="list-data">
+  <thead>
+    <tr>
+        <th>Batch Name</th>
+        <th>Enrollemnt Status</th>
+        <% unless current_user.student? %>
+          <th>Student Name</th>
+        <% end %>
+        <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @enrollments.each do |enrollment| %>
+      <tr>
+        <td><%= enrollment.batch.name %></td>
+        <td><% if enrollment.status == 'pending' %>
+              <span style="color: blue;"><%= enrollment.status %></span>
+            <% elsif enrollment.status == 'approved' %>
+              <span style="color: green;"><%= enrollment.status %></span>
+            <% else %>
+              <span style="color: red;"><%= enrollment.status %></span>
+            <% end %>
+        </td>
+        <% unless current_user.student? %>
+          <td><%= enrollment.student.name %></td>
+          <td>
+            <% if enrollment.status == 'approved' || enrollment.status == 'rejected' %>
+              <%= enrollment.status %>
+            <% else %>
+              <%= link_to 'Approve', enrollment_path({enrollment: {status: 'approved'}, id: enrollment.id}), method: :patch %>  
+              <%= link_to 'Reject', enrollment_path({enrollment: {status: 'rejected'}, id: enrollment.id}), method: :patch %>
+            <% end %>  
+           </td>
+        <% end %>
+        <% if enrollment.status == 'approved' %>
+          <td><%= link_to 'Check Classmates', show_class_mates_enrollment_path(enrollment.id) %></td>
+        <% else %>
+          <td><%= 'Not Approved' %></td>
+        <% end %>  
+      </tr>
+    <% end %>
+  </tbody>
+</table>

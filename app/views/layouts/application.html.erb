@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>EmeritusEduSys</title>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application', media: 'all' %>
+    <%= favicon_link_tag asset_path('emeritus_logo.png') %>
+  </head>
+  <body>
+    <% if current_user.present? %>
+      <%= render partial: "shared/logged_in_header" %>
+      <div class="sb-nav-fixed">
+        <div id="layoutSidenav">
+          <div id="layoutSidenav_nav">
+            <%= render partial: "shared/side_menu" %>
+          </div>
+          <div id="layoutSidenav_content" style="top:0px;">
+            <main>
+              <%= render 'shared/flash_messages' if flash.present?%>
+              <%= yield %>
+            </main>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content" style="background-color: #00bcff;">
+            <div class="container">
+              <%= render 'shared/flash_messages' if flash.present?%>  
+              <%= yield %>
+            </div>
+        </div>
+      </div>
+    <% end %>
+  </body>
+</html>

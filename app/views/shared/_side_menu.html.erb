@@ -1,0 +1,92 @@
+<nav class="sb-sidenav accordion" id="sidenavAccordion">
+  <div class="sb-sidenav-menu">
+    <div class="nav">
+      <a class="nav-link" href="<%= root_path %>">
+        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+        Dashboard
+      </a>
+      <% if can? :read,SchoolAdmin  %>
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#school_admin" aria-expanded="false" aria-controls="school_admin">
+          <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+          School Admins
+          <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="school_admin" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+          <nav class="sb-sidenav-menu-nested nav">
+            <a class="nav-link" href="<%= school_admins_path %>">School Admins List</a>
+          </nav>
+        </div>
+      <% end %>
+      <% if can? :read, Student%>
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#student" aria-expanded="false" aria-controls="student">
+          <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+          Students
+          <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="student" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+          <nav class="sb-sidenav-menu-nested nav">
+            <a class="nav-link" href="<%= students_path %>">Student List</a>
+          </nav>
+        </div>
+      <% end %>
+      <% if can? :read, Course %>
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#courseLayouts" aria-expanded="false" aria-controls="courseLayouts">
+          <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+          Courses
+          <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="courseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+          <nav class="sb-sidenav-menu-nested nav">
+            <a class="nav-link" href="<%= courses_path %>">Course List</a>
+          </nav>
+        </div>
+      <% end %>  
+      <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#schoolLayouts" aria-expanded="false" aria-controls="schoolLayouts">
+        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+        Schools
+        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+      </a>
+      <div class="collapse" id="schoolLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+        <nav class="sb-sidenav-menu-nested nav">
+          <% if can? :read, School %>
+            <a class="nav-link" href="<%= schools_path %>">Schools List</a>
+          <% elsif current_user.schooladmin? %>
+            <% if current_user.school %>
+              <a class="nav-link" href="<%= school_path(current_user.school.id) %>">Manage Assigned School</a>
+            <% else %>
+              No School Assigned
+            <% end %>
+          <% elsif current_user.student? %>  
+            <a class="nav-link" href="<%= schools_path %>">Schools List</a>
+          <% end %>  
+        </nav>
+      </div>
+      <% if can? :read, Batch%>
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#batchLayouts" aria-expanded="false" aria-controls="batchLayouts">
+          <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+          Batches
+          <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="batchLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+          <nav class="sb-sidenav-menu-nested nav">
+              <a class="nav-link" href="<%= batches_path %>">Batch List</a>
+          </nav>
+        </div>
+      <% end %>
+      <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#enrollLayouts" aria-expanded="false" aria-controls="enrollLayouts">
+          <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+          Enrollment
+          <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+      </a>
+      <div class="collapse" id="enrollLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+        <nav class="sb-sidenav-menu-nested nav">
+            <a class="nav-link" href="<%= enrollments_path %>">Enrollment List</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="sb-sidenav-footer">
+    <div class="small">Logged in as:</div>
+    <%= current_user.type %>
+  </div>
+</nav>

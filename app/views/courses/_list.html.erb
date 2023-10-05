@@ -1,0 +1,25 @@
+<table class="table table-striped table-bordered table-hover" id="list-data">
+  <thead>
+    <tr>
+        <th>Name</th>
+        <th>code</th>
+        <th>Duration</th>
+        <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.name %></td>
+        <td><%= course.code %></td>
+        <td><%= course.duration %></td>
+        <td>
+          <%if can? :update,Course%>
+            <%= link_to ('<i class="fa fa-edit"></i>').html_safe, edit_course_path(course.id), title: "Edit" %>  
+          <%end%>
+          <%= link_to ('<i class="fa fa-eye"></i>').html_safe, course_path(course.id), title: "Show" %> 
+         </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

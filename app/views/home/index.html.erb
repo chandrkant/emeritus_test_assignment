@@ -1,0 +1,17 @@
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Dashboard</h1>
+    <div class="card mb-4">
+        <div class="card-body">
+            <p class="mb-0">
+                <% if current_user.admin? %>
+                  Welcome To Admin Dashboard
+                <% elsif current_user.schooladmin? %>
+                  Welcome To School Admin Dashboard
+                <% else %>
+                  Welcome To Student Dashboard
+                <% end %> 
+            </p>
+        </div>
+    </div>
+</div>
+                

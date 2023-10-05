@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+  <div class="col-lg-5">
+    <div class="card shadow-lg border-0 rounded-lg mt-5">
+      <div class="card-header">
+        <h3 class="text-center font-weight-light my-4">Login</h3>
+      </div>
+      <div class="card-body">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example3">Email address</label>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", id: "form3Example3", class: "form-control form-control-lg", placeholder: "Enter a valid email address" %>
+          </div>
+          <div class="form-outline mb-3">
+            <label class="form-label" for="form3Example4">Password</label>
+            <%= f.password_field :password, autocomplete: "new-password", id: "form3Example4", class: "form-control form-control-lg", placeholder: "Enter password" %>
+          </div>
+          <% if devise_mapping.rememberable? %>
+            <div class="form-check mb-3">
+              <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
+              <%= f.check_box :remember_me, class: "form-check-input", id: "inputRememberPassword", value: "" %>
+            </div>
+          <% end %>  
+          <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+              <a class="small" href="#">Forgot Password?</a>
+              <%= f.submit "LogIn", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="card-footer text-center py-3">
+          <div class="small"><a href="/users/sign_up">Do you need an account to enroll in courses? Sign up!</a></div>
+      </div>
+    </div>
+  </div>
+</div>
