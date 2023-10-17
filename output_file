@@ -1,0 +1,56 @@
+
+== Brakeman Report ==
+
+Application Path: /home/ck/rails-new/emeritus-pro-test
+Rails Version: 6.1.7.6
+Brakeman Version: 6.0.1
+Scan Date: 2023-10-05 09:47:28 +0530
+Duration: 0.791581178 seconds
+Checks Run: BasicAuth, BasicAuthTimingAttack, CSRFTokenForgeryCVE, ContentTag, CookieSerialization, CreateWith, CrossSiteScripting, DefaultRoutes, Deserialize, DetailedExceptions, DigestDoS, DynamicFinders, EOLRails, EOLRuby, EscapeFunction, Evaluation, Execute, FileAccess, FileDisclosure, FilterSkipping, ForgerySetting, HeaderDoS, I18nXSS, JRubyXML, JSONEncoding, JSONEntityEscape, JSONParsing, LinkTo, LinkToHref, MailTo, MassAssignment, MimeTypeDoS, ModelAttrAccessible, ModelAttributes, ModelSerialize, NestedAttributes, NestedAttributesBypass, NumberToCurrency, PageCachingCVE, Pathname, PermitAttributes, QuoteTableName, Redirect, RegexDoS, Render, RenderDoS, RenderInline, ResponseSplitting, RouteDoS, SQL, SQLCVEs, SSLVerify, SafeBufferManipulation, SanitizeConfigCve, SanitizeMethods, SelectTag, SelectVulnerability, Send, SendFile, SessionManipulation, SessionSettings, SimpleFormat, SingleQuotes, SkipBeforeFilter, SprocketsPathTraversal, StripTags, SymbolDoSCVE, TemplateInjection, TranslateBug, UnsafeReflection, UnsafeReflectionMethods, ValidationRegex, VerbConfusion, WeakRSAKey, WithoutProtection, XMLDoS, YAMLParsing
+
+== Overview ==
+
+Controllers: 10
+Models: 10
+Templates: 45
+Errors: 0
+Security Warnings: 4
+
+== Warning Types ==
+
+SQL Injection: 4
+
+== Warnings ==
+
+Confidence: Medium
+Category: SQL Injection
+Check: SQL
+Message: Possible SQL injection
+Code: self.includes(:school, :course).order("batches.updated_at desc").where(["batches.name LIKE '%#{params[:name]}%'"])
+File: app/models/batch.rb
+Line: 25
+
+Confidence: Medium
+Category: SQL Injection
+Check: SQL
+Message: Possible SQL injection
+Code: self.includes(:school_admin).order("schools.updated_at desc").where("#{"schools.name LIKE '%#{params[:name]}%'"} AND #{"schools.city = '#{params[:city]}'"} AND #{"schools.country = '#{params[:country]}'"}")
+File: app/models/school.rb
+Line: 31
+
+Confidence: Medium
+Category: SQL Injection
+Check: SQL
+Message: Possible SQL injection
+Code: self.order("users.updated_at desc").where("#{"users.name LIKE '%#{params[:name]}%'"} AND #{"users.email LIKE '%#{params[:email]}%'"}")
+File: app/models/user.rb
+Line: 33
+
+Confidence: Weak
+Category: SQL Injection
+Check: SQL
+Message: Possible SQL injection
+Code: order("courses.updated_at desc").where("#{"courses.name LIKE '%#{params[:name]}%'"} AND #{"courses.duration = '#{params[:duration]}'"}")
+File: app/models/course.rb
+Line: 26
+

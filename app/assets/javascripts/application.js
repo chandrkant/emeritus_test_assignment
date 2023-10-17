@@ -16,6 +16,9 @@
 //= require bootstrap
 //= require select2
 //= require bootstrap-datepicker
+//=require jquery.dataTables.min
+//= require dataTables.bootstrap4.min
+//= require scripts
 //= require_tree .
 
 $(document).ready(function () {
